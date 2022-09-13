@@ -17,12 +17,16 @@ args = vars(ap.parse_args())
 
 # load and quantify our image dataset
 print("[INFO] preparing dataset...")
-data = load_dataset(args["dataset"], bins=(3, 3, 3))
+data, failed = load_dataset(args["dataset"], bins=(3, 3, 3))
+
+# save list of paths with failed attemps
+with open(r'failed_paths.txt', 'w') as fp:
+    fp.write('\n'.join(failed))
 
 # train the anomaly detection model
 print("[INFO] fitting anomaly detection model...")
-model = IsolationForest(n_estimators=100, contamination=0.01,
-	random_state=42)
+model = IsolationForest(n_estimators=1000, contamination='auto', 
+    					n_jobs=5, max_features=3, random_state=42)
 model.fit(data)
 
 # serialize the anomaly detection model to disk

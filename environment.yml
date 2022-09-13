@@ -1,0 +1,11 @@
+name: image_anom
+dependencies:
+  - python=3.9
+  - pip
+  - pip:
+    - numpy
+    - opencv-contrib-python
+    - scikit-learn
+    - imutils
+
+

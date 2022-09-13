@@ -30,6 +30,7 @@ features = quantify_image(hsv, bins=(3, 3, 3))
 preds = model.predict([features])[0]
 label = "anomaly" if preds == -1 else "normal"
 color = (0, 0, 255) if preds == -1 else (0, 255, 0)
+print(label)
 
 # draw the predicted label text on the original image
 cv2.putText(image, label, (10,  25), cv2.FONT_HERSHEY_SIMPLEX,
@@ -38,3 +39,4 @@ cv2.putText(image, label, (10,  25), cv2.FONT_HERSHEY_SIMPLEX,
 # display the image
 cv2.imshow("Output", image)
 cv2.waitKey(0)
+
